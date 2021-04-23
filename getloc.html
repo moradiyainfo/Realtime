@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <script>
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.watchPosition(showPosition);
+        } else {
+          x.innerHTML = "not supported by this browser.";
+        }
+      }
+
+      function showPosition(position) {
+        var xhttp = new XMLHttpRequest();
+        var lat = position.coords.latitude;
+        var long = position.coords.longitude;
+
+        xhttp.open("POST", "/sendloc", true);
+        xhttp.setRequestHeader(
+          "Content-type",
+          "application/x-www-form-urlencoded"
+        );
+        xhttp.send("lat=" + lat + "&long=" + long);
+      }
+    </script>
+    <button name="ff" value="Submit" onclick="getLocation()">Submit</button>
+  </body>
+</html>

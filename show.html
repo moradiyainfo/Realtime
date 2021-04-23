@@ -1,0 +1,37 @@
+<html>
+  <body>
+    <div id="di"></div>
+
+    
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io.connect("/");
+      // socket.on('stats', function(data) {
+      //     $('#di').html("User Connected : "+data.numClients)
+      //     console.log('Connected clients:', data.numClients);
+      // });
+      socket.on("location", function (data) {
+        
+        console.log("hgg");
+        var url =
+          "https://www.google.com/maps/@" + data.lat + "," + data.long + ",20z";
+        $("#di").append(
+          "<br> id: " +
+            data.id +
+            " Lattitude :- " +
+            data.lat +
+            " - Longitude: - " +
+            data.long +
+            " <br> <a target=_blank href=" +
+            url +
+            ">Click For Gmap</a></html><br>"
+        );
+      });
+    </script>
+  </body>
+</html>
